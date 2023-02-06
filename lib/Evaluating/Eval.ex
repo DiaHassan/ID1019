@@ -13,8 +13,9 @@ defmodule Eval do
   def test  do
     env = %{a: 1, b: 2, c: 3, d: 4}
     expr = {:add, {:add, {:mul, {:num, 2}, {:var, :a}}, {:num, 3}}, {:q, 6, 4}}
+    expr1 = {:mul, {:q, 5,2}, {:q, 4, 3}}
 
-    eval(expr, env)
+    eval(expr1, env)
   end
 
   def test2 do
