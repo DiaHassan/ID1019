@@ -18,15 +18,18 @@ defmodule Higher do
     end
   end
 
-  def double_five_animal( [], _) do [] end
-  def double_five_animal( [head | tail], f_case) do
-      case f_case do
-      :double -> double([head | tail])
-      :five -> five([head | tail])
-      :animal -> animal([head | tail])
+  def double_five_animal([head | tail], f_case) do
+    case f_case do
+        :double -> [2 * head | double_five_animal(tail, f_case)]
+        :five -> [5 + head | double_five_animal(tail, f_case)]
+        :animal ->
+            if (head == :dog) do
+              [:fido | double_five_animal(tail, f_case)]
+          else
+            [head | double_five_animal(tail, f_case)]
+        end
       end
   end
-
 
   def apply_to_all([], _) do [] end
   def apply_to_all([head | tail], f) do
