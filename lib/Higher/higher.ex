@@ -20,10 +20,51 @@ defmodule Higher do
 
   def double_five_animal( [], _) do [] end
   def double_five_animal( [head | tail], f_case) do
-    case f_case do
-    :double -> double([head | tail])
-    :five -> five([head | tail])
-    :animal -> animal([head | tail])
+      case f_case do
+      :double -> double([head | tail])
+      :five -> five([head | tail])
+      :animal -> animal([head | tail])
+      end
+  end
+
+
+  def apply_to_all([], _) do [] end
+  def apply_to_all([head | tail], f) do
+    [f.(head) | apply_to_all(tail, f)]
+  end
+
+  def sum([]) do 0 end
+  def sum( [head | tail] ) do
+    head + sum(tail)
+  end
+
+  def fold_right([], ini, _ ) do ini end
+  def fold_right([head | tail], ini, f ) do
+    f.(head, fold_right(tail, ini, f))
+  end
+
+  def fold_left([], ini, _) do ini end
+  def fold_left([head|tail], ini, f) do
+    fold_left(tail, f.(head, ini), f)
+  end
+
+
+  def odd( [] ) do [] end
+  def odd([head | tail]) do
+    if rem(head,2) == 1 do
+      [head | odd(tail)]
+    else
+      odd(tail)
     end
   end
+
+  def filter([], _) do [] end
+  def filter([head | tail], f) do
+    if f.(head) do
+      [head | filter(tail, f)]
+    else
+      filter(tail, f)
+    end
+  end
+
 end
