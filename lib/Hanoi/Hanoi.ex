@@ -1,12 +1,12 @@
 defmodule Hanoi do
 
   def test(n) do
-    hanoi(n, :h, :m, :k)
+    hanoi(n, :a, :b, :c)
   end
 
   def hanoi(0, _, _, _) do [] end
-  def hanoi(n, from, mid, finish) do
-    hanoi(n-1, from, finish, mid) ++ [{:move, from, finish}] ++ hanoi(n-1, mid, from, finish)
+  def hanoi(n, first, second, third) do
+    hanoi(n-1, first, third, second) ++ [{:move, first, third}] ++ hanoi(n-1, second, first, third)
   end
 
 end
